@@ -9,9 +9,17 @@ jobs:
           runs-on: self-hosted
           strategy:
               matrix:
-                    python-version: [3]
+                    python-version: [3.8,3.9]
           steps:
             - uses: actions/checkout@v3
+            - name: Install Python (if not pre-installed)
+              shell: bash
+              run: |
+                if ! command -v python3 >/dev/null 2>&1; then
+                  # Install Python 3 (adjust based on your runner's OS and package manager)
+                  curl -sSL https://www.python.org/downloads/ | grep -E 'python3(.+?-amd64)' | cut -d '"' -f2 | head -n 1 | xargs -I {} sudo apt install {}  # Example for Ubuntu/Debian
+                  # For other OSes, replace with appropriate installation commands
+                fi
             - name: Set up Python
               uses: actions/setup-python@v2
               with:
