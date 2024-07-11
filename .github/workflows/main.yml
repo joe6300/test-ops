@@ -9,7 +9,7 @@ jobs:
           runs-on: self-hosted
           strategy:
               matrix:
-                    python-version: [3.8.18, 3.9]
+                    python-version: [3.11.4, 3.9]
           steps:
             - uses: actions/checkout@v3
             - name: Set up Python
